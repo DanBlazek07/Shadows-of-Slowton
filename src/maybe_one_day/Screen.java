@@ -1,11 +1,9 @@
-package main;
+package maybe_one_day;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -38,4 +36,5 @@ public class Screen extends Application {
         stage.setFullScreen(false);
         stage.show();
     }
+    //        Screen.launch();
 }
