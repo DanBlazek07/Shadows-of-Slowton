@@ -11,19 +11,23 @@ import java.io.IOException;
 public class Player extends Entity {
     Panel p;
     KeyHandler k;
+    public final int screenX;
+    public final int screenY;
 
     public Player(Panel p, KeyHandler k) {
         this.p = p;
         this.k = k;
         defaultV();
         getPlayerImage();
+        screenX = p.width/2 - p.finalTileSize/2;
+        screenY = p.height/2 - p.finalTileSize/2;
     }
 
     public void defaultV() {
-        x = 96;
-        y = 96;
+        worldX = p.finalTileSize * 2;
+        worldY = p.finalTileSize * 7;
         speed = 8;
-        dir = "down";
+        direction = "down";
     }
 
     public void getPlayerImage() {
@@ -43,20 +47,20 @@ public class Player extends Entity {
 
     public void update() {
         if (k.up) {
-            dir = "up";
-            y -= speed;
+            direction = "up";
+            worldY -= speed;
         }
         if (k.down) {
-            dir = "down";
-            y += speed;
+            direction = "down";
+            worldY += speed;
         }
         if (k.left) {
-            dir = "left";
-            x -= speed;
+            direction = "left";
+            worldX -= speed;
         }
         if (k.right) {
-            dir = "right";
-            x += speed;
+            direction = "right";
+            worldX += speed;
         }
         spriteCount++;
         if (spriteCount > 10) {
@@ -72,7 +76,7 @@ public class Player extends Entity {
 
     public void draw(Graphics2D g2) {
         BufferedImage img = null;
-        switch (dir) {
+        switch (direction) {
             case "up":
                 if (spriteNum == 1) {
                     img = u1;
@@ -106,6 +110,6 @@ public class Player extends Entity {
                 }
                 break;
         }
-        g2.drawImage(img, x, y, p.finalTileSize, p.finalTileSize, null);
+        g2.drawImage(img, screenX, screenY, p.finalTileSize, p.finalTileSize, null);
     }
 }
