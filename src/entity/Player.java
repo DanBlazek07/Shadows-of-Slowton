@@ -13,23 +13,38 @@ public class Player extends Entity {
     KeyHandler k;
     public final int screenX;
     public final int screenY;
+    public int amountOfCoins = 0;
+    boolean hasBlade = false;
 
     public Player(Panel p, KeyHandler k) {
-        this.p = p;
+        super(p);
         this.k = k;
-        defaultV();
+        screenX = p.width / 2 - p.finalTileSize / 2;
+        screenY = p.height / 2 - p.finalTileSize / 2;
+        defaultValues();
         getPlayerImage();
-        screenX = p.width/2 - p.finalTileSize/2;
-        screenY = p.height/2 - p.finalTileSize/2;
+        bounds = new Rectangle();
+        bounds.x = 4;
+        bounds.y = 8;
+        boundsX = bounds.x;
+        boundsY = bounds.y;
+        bounds.width = p.finalTileSize - 8;
+        bounds.height = p.finalTileSize - 8;
     }
 
-    public void defaultV() {
+    /**
+     * sets the default values for the player
+     **/
+    public void defaultValues() {
         worldX = p.finalTileSize * 2;
         worldY = p.finalTileSize * 7;
         speed = 8;
         direction = "down";
     }
 
+    /**
+     * sets an according player image
+     **/
     public void getPlayerImage() {
         try {
             u1 = ImageIO.read(getClass().getResourceAsStream("/player/pu1.png"));
@@ -45,35 +60,101 @@ public class Player extends Entity {
         }
     }
 
+    /**
+     * updates players direction
+     * if the player isn't colliding
+     * and due to direction having impact on sprite
+     * it changes that too
+     **/
     public void update() {
         if (k.up) {
             direction = "up";
-            worldY -= speed;
         }
         if (k.down) {
             direction = "down";
-            worldY += speed;
         }
         if (k.left) {
             direction = "left";
-            worldX -= speed;
         }
         if (k.right) {
             direction = "right";
-            worldX += speed;
+        }
+        collisionOn = false;
+        p.cManager.checkTile(this);
+        int itemIndex = p.cManager.checkItem(this, true);
+        pickUp(itemIndex);
+        if (!collisionOn) {
+            switch (direction) {
+                case "up":
+                    worldY -= speed;
+                    break;
+                case "down":
+                    worldY += speed;
+                    break;
+                case "left":
+                    worldX -= speed;
+                    break;
+                case "right":
+                    worldX += speed;
+                    break;
+            }
         }
         spriteCount++;
         if (spriteCount > 10) {
-            if (spriteNum == 1){
+            if (spriteNum == 1) {
                 spriteNum = 2;
-            }
-            else if (spriteNum == 2){
+            } else if (spriteNum == 2) {
                 spriteNum = 1;
             }
             spriteCount = 0;
         }
     }
 
+    /**
+     * makes the player do an action with an item
+     **/
+    public void pickUp(int index) {
+        if (index != 666) {
+            String itemName = p.item[index].name;
+            switch (itemName) {
+                case "Blade":
+                    hasBlade = true;
+                    p.item[index] = null;
+                    p.ui.showMessage("I have a blade");
+                    break;
+                case "One_Coin":
+                    amountOfCoins++;
+                    p.item[index] = null;
+                    p.ui.showMessage("I found a coin");
+                    break;
+                case "Five_Coin":
+                    amountOfCoins++;
+                    amountOfCoins++;
+                    amountOfCoins++;
+                    amountOfCoins++;
+                    amountOfCoins++;
+                    p.item[index] = null;
+                    p.ui.showMessage("I was lucky and found 5 coins");
+                    break;
+                case "SCdoor":
+                    if (amountOfCoins >= 100) {
+                        p.item[index] = null;
+                        p.ui.showMessage("KABOOM! The door has opened");
+                    }
+                    else p.ui.showMessage("Bonk! The door did not bother to move");
+                    break;
+                case "Wisdom":
+                    p.item[index] = null;
+                    p.ui.showMessage("U WON!!!");
+                    p.ui.finished = true;
+                    break;
+            }
+        }
+    }
+
+    /**
+     * draws the player
+     **/
     public void draw(Graphics2D g2) {
         BufferedImage img = null;
         switch (direction) {

@@ -11,12 +11,12 @@ import java.io.InputStreamReader;
 
 public class TileManager {
     Panel panel;
-    Tile[] tiles;
-    int[][] mapTileNum;
+    public Tile[] tiles;
+    public int[][] mapTileNum;
 
     public TileManager(Panel panel) {
         this.panel = panel;
-        tiles = new Tile[6];
+        tiles = new Tile[7];
         mapTileNum = new int[panel.maxWorldCol][panel.maxWorldRow];
         getTileImage();
         loadMap("/maps/worldMap.txt");
@@ -28,14 +28,20 @@ public class TileManager {
             tiles[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/grass.png"));
             tiles[1] = new Tile();
             tiles[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/wall.png"));
+            tiles[1].collision = true;
             tiles[2] = new Tile();
             tiles[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/tree.png"));
+            tiles[2].collision = true;
             tiles[3] = new Tile();
             tiles[3].image = ImageIO.read(getClass().getResourceAsStream("/tiles/path.png"));
             tiles[4] = new Tile();
             tiles[4].image = ImageIO.read(getClass().getResourceAsStream("/tiles/stone.png"));
+            tiles[4].collision = true;
             tiles[5] = new Tile();
             tiles[5].image = ImageIO.read(getClass().getResourceAsStream("/tiles/wood.png"));
+            tiles[5].collision = true;
+            tiles[6] = new Tile();
+            tiles[6].image = ImageIO.read(getClass().getResourceAsStream("/tiles/plank.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -75,9 +81,14 @@ public class TileManager {
             int worldY = worldRow * panel.finalTileSize;
             int screenX = worldX - panel.player.worldX + panel.player.screenX;
             int screenY = worldY - panel.player.worldY + panel.player.screenY;
-            g2.drawImage(tiles[tileNum].image, screenX, screenY, panel.finalTileSize, panel.finalTileSize, null);
-            worldCol++;
+            if (worldX + panel.finalTileSize > panel.player.worldX - panel.player.screenX &&
+                    worldX - panel.finalTileSize < panel.player.worldX + panel.player.screenX &&
+                    worldY + panel.finalTileSize > panel.player.worldY - panel.player.screenY &&
+                    worldY - panel.finalTileSize < panel.player.worldY + panel.player.screenY) {
+                g2.drawImage(tiles[tileNum].image, screenX, screenY, panel.finalTileSize, panel.finalTileSize, null);
+            }
 
+            worldCol++;
             if (worldCol == panel.maxWorldCol) {
                 worldCol = 0;
                 worldRow++;
