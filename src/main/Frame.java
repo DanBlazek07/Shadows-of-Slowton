@@ -15,6 +15,7 @@ public class Frame extends JFrame {
         setVisible(true);
         panel.setItemsOnScreen();
         panel.setNPCOnScreen();
+        panel.setEnemyOnScreen();
         panel.start();
     }
 }

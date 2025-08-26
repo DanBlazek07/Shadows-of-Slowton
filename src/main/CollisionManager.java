@@ -136,29 +136,37 @@ public class CollisionManager {
                     case "up":
                         entity.bounds.y -= entity.speed;
                         if (entity.bounds.intersects(target[i].bounds)) {
-                            entity.collisionOn = true;
-                            index = i;
+                            if (target[i] != entity){
+                                entity.collisionOn = true;
+                                index = i;
+                            }
                         }
                         break;
                     case "down":
                         entity.bounds.y += entity.speed;
                         if (entity.bounds.intersects(target[i].bounds)) {
-                            entity.collisionOn = true;
-                            index = i;
+                            if (target[i] != entity){
+                                entity.collisionOn = true;
+                                index = i;
+                            }
                         }
                         break;
                     case "left":
                         entity.bounds.x -= entity.speed;
                         if (entity.bounds.intersects(target[i].bounds)) {
-                            entity.collisionOn = true;
-                            index = i;
+                            if (target[i] != entity){
+                                entity.collisionOn = true;
+                                index = i;
+                            }
                         }
                         break;
                     case "right":
                         entity.bounds.x += entity.speed;
                         if (entity.bounds.intersects(target[i].bounds)) {
-                            entity.collisionOn = true;
-                            index = i;
+                            if (target[i] != entity){
+                                entity.collisionOn = true;
+                                index = i;
+                            }
                         }
                         break;
                 }
@@ -171,7 +179,7 @@ public class CollisionManager {
         return index;
     }
     /**
-     * checks whether an NPC is colliding with a player
+     * checks whether an entity is colliding with a player
      **/
     public void checkPlayerCollision(Entity entity) {
         entity.bounds.x = entity.worldX + entity.bounds.x;

@@ -12,6 +12,8 @@ public class NPC extends Entity {
         super(panel);
         direction = "down";
         speed = 8;
+        maxLife = -1;
+        currentLife = maxLife;
         getNPCImage();
     }
     /**

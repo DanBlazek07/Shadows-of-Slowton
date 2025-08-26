@@ -1,5 +1,6 @@
 package main;
 
+import entity.Enemy;
 import entity.NPC;
 import items.*;
 
@@ -9,6 +10,7 @@ public class Mapper {
     public Mapper(Panel panel) {
         this.panel = panel;
     }
+
     /**
      * sets the item on the map
      **/
@@ -84,18 +86,22 @@ public class Mapper {
         panel.item[63].worldX = 80 * panel.finalTileSize;
         panel.item[63].worldY = 19 * panel.finalTileSize;
     }
+
     /**
      * sets the NPC somewhere on the map
      **/
-    public void setNPC(){
+    public void setNPC() {
         panel.npc[0] = new NPC(panel);
-        panel.npc[0].worldX = 2*panel.finalTileSize;
+        panel.npc[0].worldX = 2 * panel.finalTileSize;
         panel.npc[0].worldY = 8 * panel.finalTileSize;
     }
+
     /**
      * sets the enemy on the map somewhere
      **/
-    public void setEnemy(){
-
+    public void setEnemy() {
+        panel.enemy[0] = new Enemy(panel);
+        panel.enemy[0].worldX = 59 * panel.finalTileSize;
+        panel.enemy[0].worldY = 15 * panel.finalTileSize;
     }
 }

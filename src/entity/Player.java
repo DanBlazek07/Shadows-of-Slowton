@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Random;
 
 public class Player extends Entity {
 
@@ -41,6 +42,8 @@ public class Player extends Entity {
         worldY = p.finalTileSize * 7;
         speed = 8;
         direction = "down";
+        maxLife = (int) 103.5;
+        currentLife = maxLife;
     }
     /**
      * sets an according player image
@@ -82,7 +85,9 @@ public class Player extends Entity {
         p.cManager.checkTile(this);
         int itemIndex = p.cManager.checkItem(this, true);
         pickUp(itemIndex);
-        int npcIndex = p.cManager.checkEntity(this, p.npc);
+        p.cManager.checkEntity(this, p.npc);
+        int enemyIndex = p.cManager.checkEntity(this, p.enemy);
+        attackEnemy(enemyIndex);
         if (!collisionOn) {
             switch (direction) {
                 case "up":
@@ -110,6 +115,27 @@ public class Player extends Entity {
         }
     }
     /**
+     * attacks the enemy and if the attack is fatal, gives random amount of money
+     **/
+    public void attackEnemy(int enemyIndex) {
+        if (enemyIndex != 666){
+            if (hasBlade){
+                actionLockCounter++;
+            }
+            if (actionLockCounter > 60){
+                p.enemy[enemyIndex].currentLife -= 5;
+                System.out.println(p.enemy[enemyIndex].currentLife);
+            }
+            if (p.enemy[enemyIndex].currentLife <= 0){
+                p.enemy[enemyIndex] = null;
+                p.ui.showMessage("Enemy has been slain.");
+                Random rndCoin = new Random();
+                int coinValue = rndCoin.nextInt(11);
+                amountOfCoins += coinValue;
+            }
+        }
+    }
+    /**
      * makes the player do an action with an item
      **/
     public void pickUp(int index) {
@@ -119,28 +145,24 @@ public class Player extends Entity {
                 case "Blade":
                     hasBlade = true;
                     p.item[index] = null;
-                    p.ui.showMessage("I have a blade");
+                    p.ui.showMessage("I have a blade.");
                     break;
                 case "One_Coin":
                     amountOfCoins++;
                     p.item[index] = null;
-                    p.ui.showMessage("I found a coin");
+                    p.ui.showMessage("I found a coin.");
                     break;
                 case "Five_Coin":
-                    amountOfCoins++;
-                    amountOfCoins++;
-                    amountOfCoins++;
-                    amountOfCoins++;
-                    amountOfCoins++;
+                    amountOfCoins = amountOfCoins + 5;
                     p.item[index] = null;
-                    p.ui.showMessage("I was lucky and found 5 coins");
+                    p.ui.showMessage("I was lucky and found 5 coins.");
                     break;
                 case "SCdoor":
                     if (amountOfCoins >= 100) {
                         p.item[index] = null;
-                        p.ui.showMessage("KABOOM! The door has opened");
+                        p.ui.showMessage("KABOOM! The door has opened.");
                     }
-                    else p.ui.showMessage("Bonk! The door did not bother to move");
+                    else p.ui.showMessage("Bonk! The door did not bother to move.");
                     break;
                 case "Wisdom":
                     p.item[index] = null;

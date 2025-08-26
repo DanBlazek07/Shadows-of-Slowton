@@ -9,7 +9,7 @@ public class Entity {
     Panel panel;
     public int worldX, worldY;
     public int speed;
-    public BufferedImage u1,u2,d1,d2,l1,l2,r1,r2,NPC,enemy;
+    public BufferedImage u1,u2,d1,d2,l1,l2,r1,r2;
     public String direction;
     public int spriteCount = 0;
     public int spriteNum = 1;
@@ -17,6 +17,8 @@ public class Entity {
     public int boundsX, boundsY;
     public boolean collisionOn = false;
     public int actionLockCounter = 0;
+    public int maxLife;
+    public int currentLife;
 
     public Entity(Panel panel){
         this.panel = panel;
@@ -33,6 +35,8 @@ public class Entity {
         collisionOn = false;
         panel.cManager.checkTile(this);
         panel.cManager.checkItem(this,false);
+        panel.cManager.checkEntity(this, panel.npc);
+        panel.cManager.checkEntity(this, panel.enemy);
         panel.cManager.checkPlayerCollision(this);
         if (!collisionOn) {
             switch (direction) {

@@ -31,6 +31,7 @@ public class Panel extends JPanel implements Runnable{
     public Item[] item = new Item[500];
     public UI ui = new UI(this);
     public Entity[] npc = new Entity[10];
+    public Entity[] enemy = new Entity[10];
 
     public Panel() {
         this.setPreferredSize(new Dimension(width, height));
@@ -103,6 +104,11 @@ public class Panel extends JPanel implements Runnable{
                 npc[i].update();
             }
         }
+        for (int i = 0; i < enemy.length; i++) {
+            if (enemy[i] != null) {
+                enemy[i].update();
+            }
+        }
     }
 
     public void paintComponent(Graphics g){
@@ -117,6 +123,11 @@ public class Panel extends JPanel implements Runnable{
         for (int i = 0; i < npc.length; i++) {
             if (npc[i] != null) {
                 npc[i].draw(g2, this);
+            }
+        }
+        for (int i = 0; i < enemy.length; i++) {
+            if (enemy[i] != null) {
+                enemy[i].draw(g2, this);
             }
         }
         player.draw(g2);
