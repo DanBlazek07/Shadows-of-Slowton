@@ -22,8 +22,8 @@ public class Panel extends JPanel implements Runnable{
     public CollisionManager cManager = new CollisionManager(this);
     public Player player = new Player(this, keyHandler);
     int FPS = 60;
-    public final int maxWorldCol = 85; //currently 85 tiles work
-    public final int maxWorldRow = 23; //currently 23 tiles work
+    public final int maxWorldCol = 350;
+    public final int maxWorldRow = 23;
     public final int worldWidth = finalTileSize*maxWorldCol;
     public final int worldHeight = finalTileSize*maxWorldRow;
     TileManager tileManager = new TileManager(this);
@@ -31,7 +31,7 @@ public class Panel extends JPanel implements Runnable{
     public Item[] item = new Item[500];
     public UI ui = new UI(this);
     public Entity[] npc = new Entity[10];
-    public Entity[] enemy = new Entity[10];
+    public Entity[] enemy = new Entity[50];
 
     public Panel() {
         this.setPreferredSize(new Dimension(width, height));
