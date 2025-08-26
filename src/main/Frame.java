@@ -3,6 +3,7 @@ package main;
 import javax.swing.*;
 
 public class Frame extends JFrame {
+
     public Frame() {
         Panel panel = new Panel();
         setTitle("Shadows of Slowton");

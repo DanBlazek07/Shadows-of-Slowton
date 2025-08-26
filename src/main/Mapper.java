@@ -9,8 +9,10 @@ public class Mapper {
     public Mapper(Panel panel) {
         this.panel = panel;
     }
-
-    public void setObject() {
+    /**
+     * sets the item on the map
+     **/
+    public void setItem() {
         panel.item[0] = new Blade();
         panel.item[0].worldX = 20 * panel.finalTileSize;
         panel.item[0].worldY = 20 * panel.finalTileSize;
@@ -82,11 +84,17 @@ public class Mapper {
         panel.item[63].worldX = 80 * panel.finalTileSize;
         panel.item[63].worldY = 19 * panel.finalTileSize;
     }
+    /**
+     * sets the NPC somewhere on the map
+     **/
     public void setNPC(){
         panel.npc[0] = new NPC(panel);
         panel.npc[0].worldX = 2*panel.finalTileSize;
         panel.npc[0].worldY = 8 * panel.finalTileSize;
     }
+    /**
+     * sets the enemy on the map somewhere
+     **/
     public void setEnemy(){
 
     }

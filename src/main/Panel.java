@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Panel extends JPanel implements Runnable{
+
     private final int tileSize = 16;
     int scale = 3;
     public int finalTileSize = tileSize * scale;
@@ -30,6 +31,7 @@ public class Panel extends JPanel implements Runnable{
     public Item[] item = new Item[500];
     public UI ui = new UI(this);
     public Entity[] npc = new Entity[10];
+
     public Panel() {
         this.setPreferredSize(new Dimension(width, height));
         this.setBackground(Color.BLACK);
@@ -37,16 +39,24 @@ public class Panel extends JPanel implements Runnable{
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
     }
+    /**
+     * puts the item on the right place
+     **/
     public void setItemsOnScreen() {
-        mapper.setObject();
+        mapper.setItem();
     }
+    /**
+     * puts the NPC on the screen to where it belongs
+     **/
     public void setNPCOnScreen(){
         mapper.setNPC();
     }
+    /**
+     * puts enemy on the screen there, where it's meant to be
+     **/
     public void setEnemyOnScreen(){
         mapper.setEnemy();
     }
-
     /**
      * starts the game
      **/
@@ -54,7 +64,9 @@ public class Panel extends JPanel implements Runnable{
         game = new Thread(this);
         game.start();
     }
-
+    /**
+     * makes the game to run
+     **/
     @Override
     public void run() {
         double interval = (double) 1000000000 / FPS;
@@ -81,6 +93,9 @@ public class Panel extends JPanel implements Runnable{
             }
         }
     }
+    /**
+     * updates the entity accordingly
+     **/
     public void update(){
         player.update();
         for(int i = 0; i < npc.length; i++){
@@ -89,6 +104,7 @@ public class Panel extends JPanel implements Runnable{
             }
         }
     }
+
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;

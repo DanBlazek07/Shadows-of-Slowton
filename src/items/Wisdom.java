@@ -4,6 +4,7 @@ import javax.imageio.ImageIO;
 import java.io.IOException;
 
 public class Wisdom extends Item {
+
     public Wisdom(){
         name = "Wisdom";
         try {

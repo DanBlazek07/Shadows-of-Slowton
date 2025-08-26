@@ -7,11 +7,14 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class Enemy extends Entity{
+
     int hp = 20;
     BufferedImage img;
+
     public Enemy(Panel panel) {
         super(panel);
     }
+
     public void getEnemyImage(){
         try{
             img = ImageIO.read(getClass().getResourceAsStream("/entities/eu1.png"));

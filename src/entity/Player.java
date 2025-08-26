@@ -9,12 +9,14 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class Player extends Entity {
+
     Panel p;
     KeyHandler k;
     public final int screenX;
     public final int screenY;
     public int amountOfCoins = 0;
     boolean hasBlade = false;
+
     public Player(Panel p, KeyHandler k) {
         super(p);
         this.p = p;
@@ -31,7 +33,6 @@ public class Player extends Entity {
         bounds.width = p.finalTileSize - 8;
         bounds.height = p.finalTileSize - 8;
     }
-
     /**
      * sets the default values for the player
      **/
@@ -41,7 +42,6 @@ public class Player extends Entity {
         speed = 8;
         direction = "down";
     }
-
     /**
      * sets an according player image
      **/
@@ -59,7 +59,6 @@ public class Player extends Entity {
             throw new RuntimeException(e);
         }
     }
-
     /**
      * updates players direction
      * if the player isn't colliding
@@ -110,7 +109,6 @@ public class Player extends Entity {
             spriteCount = 0;
         }
     }
-
     /**
      * makes the player do an action with an item
      **/
@@ -152,7 +150,6 @@ public class Player extends Entity {
             }
         }
     }
-
     /**
      * draws the player
      **/

@@ -1,7 +1,6 @@
 package main;
 
 import entity.Entity;
-import entity.Player;
 
 public class CollisionManager {
     Panel p;
@@ -9,7 +8,9 @@ public class CollisionManager {
     public CollisionManager(Panel panel) {
         this.p = panel;
     }
-
+    /**
+     * checks whether an entity has a collision with the tile
+     **/
     public void checkTile(Entity entity) {
         int entityLeftWorldX = entity.worldX + entity.bounds.x;
         int entityRightWorldX = entity.worldX + entity.bounds.x + entity.bounds.width;
@@ -55,7 +56,9 @@ public class CollisionManager {
                 break;
         }
     }
-
+    /**
+     * checks whether an entity is colliding with an item, and if it is a player
+     **/
     public int checkItem(Entity entity, boolean player) {
         int index = 666;
         for (int i = 0; i < p.item.length; i++) {
@@ -118,7 +121,9 @@ public class CollisionManager {
         }
         return index;
     }
-
+    /**
+     * checks whether a player is colliding with any entity
+     **/
     public int checkEntity(Entity entity, Entity[] target) {
         int index = 666;
         for (int i = 0; i < target.length; i++) {
@@ -165,7 +170,9 @@ public class CollisionManager {
         }
         return index;
     }
-
+    /**
+     * checks whether an NPC is colliding with a player
+     **/
     public void checkPlayerCollision(Entity entity) {
         entity.bounds.x = entity.worldX + entity.bounds.x;
         entity.bounds.y = entity.worldY + entity.bounds.y;
@@ -202,5 +209,4 @@ public class CollisionManager {
         p.player.bounds.x = p.player.boundsX;
         p.player.bounds.y = p.player.boundsY;
     }
-
 }

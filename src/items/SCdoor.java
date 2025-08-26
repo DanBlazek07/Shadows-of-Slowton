@@ -4,6 +4,7 @@ import javax.imageio.ImageIO;
 import java.io.IOException;
 
 public class SCdoor extends Item {
+
     public SCdoor(){
         name = "SCdoor";
         try {

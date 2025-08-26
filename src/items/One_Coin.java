@@ -4,6 +4,7 @@ import javax.imageio.ImageIO;
 import java.io.IOException;
 
 public class One_Coin extends Item{
+
     public One_Coin(){
         name = "One_Coin";
         try {

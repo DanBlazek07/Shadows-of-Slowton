@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class TileManager {
+
     Panel panel;
     public Tile[] tiles;
     public int[][] mapTileNum;
@@ -21,7 +22,9 @@ public class TileManager {
         getTileImage();
         loadMap("/maps/worldMap.txt");
     }
-
+    /**
+     * chooses the tile image and if it has a collision or not
+     **/
     public void getTileImage() {
         try {
             tiles[0] = new Tile();
@@ -46,7 +49,9 @@ public class TileManager {
             e.printStackTrace();
         }
     }
-
+    /**
+     * loads the entire map
+     **/
     public void loadMap(String fileName){
         try {
             InputStream is = getClass().getResourceAsStream(fileName);
@@ -71,7 +76,9 @@ public class TileManager {
             e.printStackTrace();
         }
     }
-
+    /**
+     * draws the tiles
+     **/
     public void draw(Graphics2D g2) {
         int worldCol = 0;
         int worldRow = 0;

@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class UI {
+
     Panel panel;
     Font arial48;
     BufferedImage coin;
@@ -13,16 +14,23 @@ public class UI {
     public String message;
     int msgCounter = 0;
     public boolean finished = false;
+
     public UI(Panel p) {
         panel = p;
         arial48 = new Font("Arial", Font.PLAIN, 48);
         One_Coin oc = new One_Coin();
         coin = oc.image;
     }
+    /**
+     * shows a message on the screen
+     **/
     public void showMessage(String msg) {
         message = msg;
         canMessage = true;
     }
+    /**
+     * draws the message on the screen
+     **/
     public void draw(Graphics2D g2) {
         if (finished){
             g2.setFont(arial48);
@@ -51,6 +59,5 @@ public class UI {
                 }
             }
         }
-
     }
 }

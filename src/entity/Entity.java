@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Entity {
+
     Panel panel;
     public int worldX, worldY;
     public int speed;
@@ -16,10 +17,17 @@ public class Entity {
     public int boundsX, boundsY;
     public boolean collisionOn = false;
     public int actionLockCounter = 0;
+
     public Entity(Panel panel){
         this.panel = panel;
     }
+    /**
+     * sets an action which each entity has differently set
+     **/
     public void action(){}
+    /**
+     * updates image of the entity accordingly
+     **/
     public void update(){
         action();
         collisionOn = false;
@@ -52,6 +60,9 @@ public class Entity {
             spriteCount = 0;
         }
     }
+    /**
+     * draws the correct image of the entity
+     **/
     public void draw(Graphics2D g2,Panel panel){
         BufferedImage img = null;
         int screenX = worldX - panel.player.worldX + panel.player.screenX;

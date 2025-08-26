@@ -7,13 +7,16 @@ import java.io.IOException;
 import java.util.Random;
 
 public class NPC extends Entity {
+
     public NPC(Panel panel) {
         super(panel);
         direction = "down";
         speed = 8;
         getNPCImage();
     }
-
+    /**
+     * returns the correct NPC image
+     **/
     public void getNPCImage() {
         try {
             u1 = ImageIO.read(getClass().getResourceAsStream("/entities/NPCu1.png"));
@@ -28,7 +31,9 @@ public class NPC extends Entity {
             e.printStackTrace();
         }
     }
-
+    /**
+     * the actions the NPC does are handled here
+     **/
     public void action() {
         actionLockCounter++;
         if (actionLockCounter == 120) {
@@ -49,5 +54,4 @@ public class NPC extends Entity {
             actionLockCounter = 0;
         }
     }
-
 }
