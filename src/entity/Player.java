@@ -15,9 +15,9 @@ public class Player extends Entity {
     public final int screenY;
     public int amountOfCoins = 0;
     boolean hasBlade = false;
-
     public Player(Panel p, KeyHandler k) {
         super(p);
+        this.p = p;
         this.k = k;
         screenX = p.width / 2 - p.finalTileSize / 2;
         screenY = p.height / 2 - p.finalTileSize / 2;
@@ -83,6 +83,7 @@ public class Player extends Entity {
         p.cManager.checkTile(this);
         int itemIndex = p.cManager.checkItem(this, true);
         pickUp(itemIndex);
+        int npcIndex = p.cManager.checkEntity(this, p.npc);
         if (!collisionOn) {
             switch (direction) {
                 case "up":

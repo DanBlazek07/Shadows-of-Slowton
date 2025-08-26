@@ -84,8 +84,8 @@ public class Mapper {
     }
     public void setNPC(){
         panel.npc[0] = new NPC(panel);
-        panel.npc[0].worldX = panel.finalTileSize*12;
-        panel.npc[0].worldY = 19 * panel.finalTileSize;
+        panel.npc[0].worldX = 2*panel.finalTileSize;
+        panel.npc[0].worldY = 8 * panel.finalTileSize;
     }
     public void setEnemy(){
 

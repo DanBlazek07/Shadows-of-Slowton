@@ -14,7 +14,7 @@ public class Enemy extends Entity{
     }
     public void getEnemyImage(){
         try{
-            img = ImageIO.read(getClass().getResourceAsStream("/NPC,enemy/sprite.png"));
+            img = ImageIO.read(getClass().getResourceAsStream("/entities/eu1.png"));
         }catch (IOException e){
             e.printStackTrace();
         }
